@@ -1,4 +1,4 @@
-import { convertNaming } from './utils'
+import { convertNaming, getRgbStringFromFigmaColor } from './utils'
 
 figma.showUI(__html__, { themeColors: true, height: 300 });
 
@@ -22,7 +22,9 @@ figma.ui.onmessage = (msg) => {
       return color.type === "SOLID";
     });
 
-    const outputText = solidPaints.map(p => convertNaming(p.name))
+    const outputText = solidPaints.map(p =>
+      convertNaming(p.name, msg.prefix) + ": " + getRgbStringFromFigmaColor((p.paints[0] as SolidPaint).color) + ";"
+    ).sort()
 
     figma.ui.postMessage({ type: "generated", data: { outputText } });
   }

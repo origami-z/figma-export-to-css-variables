@@ -1,5 +1,5 @@
 import { Button, ToolkitProvider } from "@jpmorganchase/uitk-core";
-import { FlexLayout } from "@jpmorganchase/uitk-lab";
+import { FlexLayout, FormField, Input } from "@jpmorganchase/uitk-lab";
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
@@ -8,9 +8,10 @@ function App() {
   const copyButtonRef = useRef<HTMLButtonElement>(null);
 
   const [text, setText] = useState("");
+  const [prefix, setPrefix] = useState("");
 
   const onExport = () => {
-    parent.postMessage({ pluginMessage: { type: "export-css" } }, "*");
+    parent.postMessage({ pluginMessage: { type: "export-css", prefix } }, "*");
   };
 
   const onCopy = () => {
@@ -41,7 +42,13 @@ function App() {
 
   return (
     <ToolkitProvider>
-      <FlexLayout direction="column" align="center">
+      <FlexLayout direction="column">
+        <FormField label="Prefix" labelPlacement="left">
+          <Input
+            value={prefix}
+            onChange={(e) => setPrefix(e.currentTarget.value)}
+          ></Input>
+        </FormField>
         <Button onClick={onExport}>Export</Button>
         <textarea
           rows={10}
