@@ -1,3 +1,5 @@
+import { Button, ToolkitProvider } from "@jpmorganchase/uitk-core";
+import { FlexLayout } from "@jpmorganchase/uitk-lab";
 import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
@@ -38,18 +40,21 @@ function App() {
   }, []);
 
   return (
-    <main>
-      <button onClick={onExport}>Export</button>
-      <textarea
-        rows={10}
-        value={text}
-        onChange={(e) => setText(e.currentTarget.value)}
-        ref={textareaRef}
-      ></textarea>
-      <button onClick={onCopy} ref={copyButtonRef}>
-        Copy
-      </button>
-    </main>
+    <ToolkitProvider>
+      <FlexLayout direction="column" align="center">
+        <Button onClick={onExport}>Export</Button>
+        <textarea
+          rows={10}
+          value={text}
+          onChange={(e) => setText(e.currentTarget.value)}
+          ref={textareaRef}
+          spellCheck={false}
+        ></textarea>
+        <Button onClick={onCopy} ref={copyButtonRef}>
+          Copy
+        </Button>
+      </FlexLayout>
+    </ToolkitProvider>
   );
 }
 
