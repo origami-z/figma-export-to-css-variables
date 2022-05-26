@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "lib": ["es6"],
+    "strict": true,
+    "types": ["jest"],
+    "typeRoots": [
+      "../../node_modules/@figma",
+      "../../node_modules/@jest",
+      "../../node_modules/@types"
+    ],
+    "esModuleInterop": true
+  },
+  "include": ["./**/*.ts"]
+}
