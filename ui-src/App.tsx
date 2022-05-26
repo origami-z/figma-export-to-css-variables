@@ -1,44 +1,54 @@
-import React, { useRef } from "react";
-import logoPng from "./logo.png";
-import logoSvg from "./logo.svg?raw";
-import Logo from "./Logo";
+import React, { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 function App() {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const copyButtonRef = useRef<HTMLButtonElement>(null);
 
-  const onCreate = () => {
-    const count = Number(inputRef.current?.value || 0);
-    parent.postMessage(
-      { pluginMessage: { type: "create-rectangles", count } },
-      "*"
-    );
+  const [text, setText] = useState("");
+
+  const onExport = () => {
+    parent.postMessage({ pluginMessage: { type: "export-css" } }, "*");
   };
 
-  const onCancel = () => {
-    parent.postMessage({ pluginMessage: { type: "cancel" } }, "*");
+  const onCopy = () => {
+    textareaRef.current?.select();
+    document.execCommand("copy");
+    copyButtonRef.current?.focus();
   };
+
+  const handleMessage = (event: MessageEvent) => {
+    switch (event.data.pluginMessage.type) {
+      case "generated":
+        setText(
+          (event.data.pluginMessage.data.outputText as string[]).join("\n")
+        );
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("message", handleMessage);
+
+    return () => {
+      window.removeEventListener("message", handleMessage);
+    };
+  }, []);
 
   return (
     <main>
-      <header>
-        <img src={logoPng} />
-        &nbsp;
-        <img src={`data:image/svg+xml;utf8,${logoSvg}`} />
-        &nbsp;
-        <Logo />
-        <h2>Rectangle Creator</h2>
-      </header>
-      <section>
-        <input id="input" type="number" min="0" ref={inputRef} />
-        <label htmlFor="input">Rectangle Count</label>
-      </section>
-      <footer>
-        <button className="brand" onClick={onCreate}>
-          Create
-        </button>
-        <button onClick={onCancel}>Cancel</button>
-      </footer>
+      <button onClick={onExport}>Export</button>
+      <textarea
+        rows={10}
+        value={text}
+        onChange={(e) => setText(e.currentTarget.value)}
+        ref={textareaRef}
+      ></textarea>
+      <button onClick={onCopy} ref={copyButtonRef}>
+        Copy
+      </button>
     </main>
   );
 }

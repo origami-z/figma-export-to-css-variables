@@ -1,5 +1,16 @@
-import { times150 } from '../utils'
+import { convertNaming } from '../utils'
 
-test('1 times 150 equals 150', () => {
-  expect(times150(1)).toEqual(150);
-});
+describe("fixNaming", () => {
+  test('removes / from name', () => {
+    expect(convertNaming('a/b/c')).toEqual('--a-b-c');
+  });
+  test('works when subsection contains space', () => {
+    expect(convertNaming('a/ b /c')).toEqual('--a-b-c');
+  });
+  test('works with number', () => {
+    expect(convertNaming('red / 100')).toEqual('--red-100');
+  });
+  test('converts to lower case', () => {
+    expect(convertNaming('RED / 100')).toEqual('--red-100');
+  });
+})
