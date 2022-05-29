@@ -51,7 +51,7 @@ function App() {
         </FormField>
         <Button onClick={onExport}>Export</Button>
         <textarea
-          rows={10}
+          rows={20}
           value={text}
           onChange={(e) => setText(e.currentTarget.value)}
           ref={textareaRef}
