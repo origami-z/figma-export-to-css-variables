@@ -5,6 +5,6 @@
     "strict": true,
     "typeRoots": ["../node_modules/@figma", "../node_modules/@types"]
   },
-  "include": ["*.ts"],
+  "include": ["./", "../shared-src"],
   "exclude": ["__tests__"]
 }

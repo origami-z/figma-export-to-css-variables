@@ -1,6 +1,7 @@
 import { Button, ToolkitProvider } from "@jpmorganchase/uitk-core";
 import { FlexLayout, FormField, Input } from "@jpmorganchase/uitk-lab";
 import React, { useEffect, useRef, useState } from "react";
+import { PostToFigmaMessage, PostToUIMessage } from "../shared-src";
 import "./App.css";
 
 function App() {
@@ -11,7 +12,10 @@ function App() {
   const [prefix, setPrefix] = useState("");
 
   const onExport = () => {
-    parent.postMessage({ pluginMessage: { type: "export-css", prefix } }, "*");
+    parent.postMessage(
+      { pluginMessage: { type: "export-css", prefix } as PostToFigmaMessage },
+      "*"
+    );
   };
 
   const onCopy = () => {
@@ -21,11 +25,10 @@ function App() {
   };
 
   const handleMessage = (event: MessageEvent) => {
-    switch (event.data.pluginMessage.type) {
+    const pluginMessage = event.data.pluginMessage as PostToUIMessage;
+    switch (pluginMessage.type) {
       case "generated":
-        setText(
-          (event.data.pluginMessage.data.outputText as string[]).join("\n")
-        );
+        setText((pluginMessage.data as string[]).join("\n"));
         break;
       default:
         break;

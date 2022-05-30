@@ -1,3 +1,4 @@
+import { PostToUIMessage } from '../shared-src/messages';
 import { convertNaming, getRgbStringFromFigmaColor } from "./utils";
 
 figma.showUI(__html__, { themeColors: true, height: 500, width: 400 });
@@ -32,6 +33,6 @@ figma.ui.onmessage = (msg) => {
       )
       .sort();
 
-    figma.ui.postMessage({ type: "generated", data: { outputText } });
+    figma.ui.postMessage({ type: "generated", data: outputText } as PostToUIMessage);
   }
 };
