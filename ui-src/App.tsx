@@ -1,7 +1,17 @@
 import { Button, ToolkitProvider } from "@jpmorganchase/uitk-core";
-import { FlexLayout, FormField, Input } from "@jpmorganchase/uitk-lab";
+import {
+  Dropdown,
+  FlexLayout,
+  FormField,
+  Input,
+} from "@jpmorganchase/uitk-lab";
 import React, { useEffect, useRef, useState } from "react";
-import { PostToFigmaMessage, PostToUIMessage } from "../shared-src";
+import {
+  ExportColorFormat,
+  ExportColorAllFormats,
+  PostToFigmaMessage,
+  PostToUIMessage,
+} from "../shared-src";
 import "./App.css";
 
 function App() {
@@ -10,10 +20,19 @@ function App() {
 
   const [text, setText] = useState("");
   const [prefix, setPrefix] = useState("");
+  const [format, setFormat] = useState<ExportColorFormat>(
+    ExportColorAllFormats[0]
+  );
 
   const onExport = () => {
     parent.postMessage(
-      { pluginMessage: { type: "export-css", prefix } as PostToFigmaMessage },
+      {
+        pluginMessage: {
+          type: "export-css",
+          prefix,
+          format,
+        } as PostToFigmaMessage,
+      },
       "*"
     );
   };
@@ -51,6 +70,17 @@ function App() {
             value={prefix}
             onChange={(e) => setPrefix(e.currentTarget.value)}
           ></Input>
+        </FormField>
+        <FormField label="Format" labelPlacement="left">
+          <Dropdown
+            source={ExportColorAllFormats as any}
+            selectedItem={format}
+            onChange={(_, item) => {
+              if (item) {
+                setFormat(item);
+              }
+            }}
+          />
         </FormField>
         <Button onClick={onExport}>Export</Button>
         <textarea

@@ -1,4 +1,4 @@
-import { convertNaming, color1To255, getRgbStringFromFigmaColor } from '../utils'
+import { convertNaming, color1To255, getRgbStringFromFigmaColor, getHexStringFromFigmaColor } from '../utils'
 
 describe("fixNaming", () => {
   test('removes / from name', () => {
@@ -34,5 +34,18 @@ describe('getRgbStringFromFigmaColor', () => {
   })
   test('converts 0.5,0.5,0.5', () => {
     expect(getRgbStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB)).toEqual('rgb(128, 128, 128)')
+  })
+})
+
+
+describe('getHexStringFromFigmaColor', () => {
+  test('converts 0,0,0', () => {
+    expect(getHexStringFromFigmaColor({ r: 0, g: 0, b: 0 } as RGB)).toEqual('#000000')
+  })
+  test('converts 0.5,0.5,0.5', () => {
+    expect(getHexStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB)).toEqual('#808080')
+  })
+  test('converts 1,1,1', () => {
+    expect(getHexStringFromFigmaColor({ r: 1, g: 1, b: 1 } as RGB)).toEqual('#FFFFFF')
   })
 })

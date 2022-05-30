@@ -4,6 +4,7 @@
   "description": "react",
   "scripts": {
     "test": "jest",
+    "test:watch": "jest --watch",
     "format": "prettier --write .",
     "tsc": "npm run tsc:main && npm run tsc:ui",
     "tsc:main": "tsc --noEmit -p plugin-src",

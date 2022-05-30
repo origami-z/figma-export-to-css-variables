@@ -18,3 +18,12 @@ export function color1To255(colorValue: number) {
 export function getRgbStringFromFigmaColor(rgb: RGB) {
   return `rgb(${color1To255(rgb.r)}, ${color1To255(rgb.g)}, ${color1To255(rgb.b)})`;
 }
+
+function componentToHex(c: number) {
+  var hex = c.toString(16).toUpperCase();
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+export function getHexStringFromFigmaColor({ r, g, b }: RGB) {
+  return "#" + componentToHex(color1To255(r)) + componentToHex(color1To255(g)) + componentToHex(color1To255(b));
+}
