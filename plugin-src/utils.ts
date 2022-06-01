@@ -24,18 +24,15 @@ export function splitGroup(name: string) {
  * Figma uses slashes for grouping styles together. This turns that slash into a dash.
  **/
 export function convertNaming(name: string, prefix?: string) {
-  return (
-    "--" +
-    (prefix || "") +
-    name
-      .toLowerCase()
-      .split("/") // Figma group is separated by "/"
-      .map(camelize)
-      .join("-")
-  );
+  return convertNamingFromGroup(splitGroup(name), prefix);
 }
+
 export function convertNamingFromGroup(nameGroups: string[], prefix?: string) {
   return "--" + (prefix || "") + nameGroups.map(camelize).join("-");
+}
+
+export function trimDefaultEnding(name: string) {
+  return name.replace(/-default$/, "");
 }
 
 /**

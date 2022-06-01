@@ -5,6 +5,7 @@ import {
   getHexStringFromFigmaColor,
   getRgbStringFromFigmaColor,
   splitGroup,
+  trimDefaultEnding,
 } from "./utils";
 
 figma.showUI(__html__, { themeColors: true, height: 520, width: 400 });
@@ -33,8 +34,12 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
         if (nameGroups.length > 1) {
           nameGroups.shift();
         }
+        const varName = convertNamingFromGroup(nameGroups, msg.prefix);
+        const varNameAfterTrim = msg.ignoreDefaultEnding
+          ? trimDefaultEnding(varName)
+          : varName;
         const cssVarLine =
-          convertNamingFromGroup(nameGroups, msg.prefix) +
+          varNameAfterTrim +
           ": " +
           colorConvertFn((p.paints[0] as SolidPaint).color) +
           ";";
@@ -51,13 +56,18 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
       });
     } else {
       outputText = solidPaints
-        .map(
-          (p) =>
-            convertNaming(p.name, msg.prefix) +
+        .map((p) => {
+          const varName = convertNaming(p.name, msg.prefix);
+          const varNameAfterTrim = msg.ignoreDefaultEnding
+            ? trimDefaultEnding(varName)
+            : varName;
+          return (
+            varNameAfterTrim +
             ": " +
             colorConvertFn((p.paints[0] as SolidPaint).color) +
             ";"
-        )
+          );
+        })
         .sort();
     }
 

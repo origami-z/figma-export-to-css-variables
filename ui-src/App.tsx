@@ -25,6 +25,7 @@ function App() {
     ExportColorAllFormats[0]
   );
   const [ignoreFirstGroup, setIgnoreFirstGroup] = useState(false);
+  const [ignoreDefaultEnding, setIgnoreDefaultEnding] = useState(false);
 
   const onExport = () => {
     parent.postMessage(
@@ -34,6 +35,7 @@ function App() {
           prefix,
           format,
           ignoreFirstGroup,
+          ignoreDefaultEnding,
         } as PostToFigmaMessage,
       },
       "*"
@@ -85,11 +87,18 @@ function App() {
             }}
           />
         </FormField>
-        <Checkbox
-          label="Ignore first group"
-          checked={ignoreFirstGroup}
-          onChange={(_, checked) => setIgnoreFirstGroup(checked)}
-        />
+        <FlexLayout>
+          <Checkbox
+            label="Extract by first group"
+            checked={ignoreFirstGroup}
+            onChange={(_, checked) => setIgnoreFirstGroup(checked)}
+          />
+          <Checkbox
+            label="Trim default ending"
+            checked={ignoreDefaultEnding}
+            onChange={(_, checked) => setIgnoreDefaultEnding(checked)}
+          />
+        </FlexLayout>
         <Button onClick={onExport}>Export</Button>
         <textarea
           rows={20}

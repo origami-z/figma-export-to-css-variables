@@ -14,6 +14,7 @@ export type ExportCssToFigmaMessage = {
   prefix: string;
   format: ExportColorFormat;
   ignoreFirstGroup?: boolean;
+  ignoreDefaultEnding?: boolean;
 };
 
 export type PostToFigmaMessage = ExportCssToFigmaMessage;

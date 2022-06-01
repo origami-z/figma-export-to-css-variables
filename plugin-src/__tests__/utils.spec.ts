@@ -4,6 +4,7 @@ import {
   getRgbStringFromFigmaColor,
   getHexStringFromFigmaColor,
   camelize,
+  trimDefaultEnding,
 } from "../utils";
 
 describe("camelize", () => {
@@ -40,6 +41,12 @@ describe("convertNaming", () => {
     expect(convertNaming("foo / border color / hover")).toEqual(
       "--foo-borderColor-hover"
     );
+  });
+});
+
+describe("trimDefaultEnding", () => {
+  test("removes default from the end", () => {
+    expect(trimDefaultEnding("abc-def-default")).toEqual("abc-def");
   });
 });
 
