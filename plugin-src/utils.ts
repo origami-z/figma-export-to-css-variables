@@ -1,8 +1,23 @@
+/** Turns string into Camel case except full capital case */
 export function camelize(str: string) {
+  if (/^[A-Z]+$/.test(str.trim())) {
+    return str.trim();
+  }
   return str.trim().replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
     if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
     return index === 0 ? match.toLowerCase() : match.toUpperCase();
   });
+}
+
+/** Extract first part of the group name. e.g. `A/B/C` => `A` */
+export function extractFirstGroup(name: string) {
+  return name.split("/").shift()?.trim() || "";
+}
+
+/** Split name to each group and clean up leading and trailing spaces. */
+export function splitGroup(name: string) {
+  // Figma group is separated by "/"
+  return name.split("/").map((x) => x.trim());
 }
 
 /**
@@ -18,6 +33,9 @@ export function convertNaming(name: string, prefix?: string) {
       .map(camelize)
       .join("-")
   );
+}
+export function convertNamingFromGroup(nameGroups: string[], prefix?: string) {
+  return "--" + (prefix || "") + nameGroups.map(camelize).join("-");
 }
 
 /**

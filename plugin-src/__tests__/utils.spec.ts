@@ -3,7 +3,20 @@ import {
   color1To255,
   getRgbStringFromFigmaColor,
   getHexStringFromFigmaColor,
+  camelize,
 } from "../utils";
+
+describe("camelize", () => {
+  test("converts 2 words", () => {
+    expect(camelize("Foo bar")).toEqual("fooBar");
+  });
+  test("converts parts with number", () => {
+    expect(camelize("Foo 100 bar")).toEqual("foo100Bar");
+  });
+  test("does not convert full capital letters", () => {
+    expect(camelize("CTA")).toEqual("CTA");
+  });
+});
 
 describe("convertNaming", () => {
   test("removes / from name", () => {

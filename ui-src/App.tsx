@@ -1,5 +1,6 @@
 import { Button, ToolkitProvider } from "@jpmorganchase/uitk-core";
 import {
+  Checkbox,
   Dropdown,
   FlexLayout,
   FormField,
@@ -23,6 +24,7 @@ function App() {
   const [format, setFormat] = useState<ExportColorFormat>(
     ExportColorAllFormats[0]
   );
+  const [ignoreFirstGroup, setIgnoreFirstGroup] = useState(false);
 
   const onExport = () => {
     parent.postMessage(
@@ -31,6 +33,7 @@ function App() {
           type: "export-css",
           prefix,
           format,
+          ignoreFirstGroup,
         } as PostToFigmaMessage,
       },
       "*"
@@ -47,7 +50,7 @@ function App() {
     const pluginMessage = event.data.pluginMessage as PostToUIMessage;
     switch (pluginMessage.type) {
       case "generated":
-        setText((pluginMessage.data as string[]).join("\n"));
+        setText(pluginMessage.data.join("\n"));
         break;
       default:
         break;
@@ -82,6 +85,11 @@ function App() {
             }}
           />
         </FormField>
+        <Checkbox
+          label="Ignore first group"
+          checked={ignoreFirstGroup}
+          onChange={(_, checked) => setIgnoreFirstGroup(checked)}
+        />
         <Button onClick={onExport}>Export</Button>
         <textarea
           rows={20}
