@@ -13,8 +13,8 @@ describe("camelize", () => {
   test("converts parts with number", () => {
     expect(camelize("Foo 100 bar")).toEqual("foo100Bar");
   });
-  test("does not convert full capital letters", () => {
-    expect(camelize("CTA")).toEqual("CTA");
+  test("convert full capital letters to lower case", () => {
+    expect(camelize("ABC")).toEqual("abc");
   });
 });
 

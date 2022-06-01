@@ -1,7 +1,7 @@
 /** Turns string into Camel case except full capital case */
 export function camelize(str: string) {
   if (/^[A-Z]+$/.test(str.trim())) {
-    return str.trim();
+    return str.trim().toLowerCase();
   }
   return str.trim().replace(/(?:^\w|[A-Z]|\b\w|\s+)/g, function (match, index) {
     if (+match === 0) return ""; // or if (/\s+/.test(match)) for white spaces
