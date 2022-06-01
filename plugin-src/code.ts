@@ -1,5 +1,9 @@
-import { PostToFigmaMessage, PostToUIMessage } from '../shared-src/messages';
-import { convertNaming, getHexStringFromFigmaColor, getRgbStringFromFigmaColor } from "./utils";
+import { PostToFigmaMessage, PostToUIMessage } from "../shared-src/messages";
+import {
+  convertNaming,
+  getHexStringFromFigmaColor,
+  getRgbStringFromFigmaColor,
+} from "./utils";
 
 figma.showUI(__html__, { themeColors: true, height: 500, width: 400 });
 
@@ -10,18 +14,24 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
       return color.type === "SOLID";
     });
 
-    const convertFn = msg.format === 'RGB' ? getRgbStringFromFigmaColor : getHexStringFromFigmaColor;
+    const colorConvertFn =
+      msg.format === "RGB"
+        ? getRgbStringFromFigmaColor
+        : getHexStringFromFigmaColor;
 
     const outputText = solidPaints
       .map(
         (p) =>
           convertNaming(p.name, msg.prefix) +
           ": " +
-          convertFn((p.paints[0] as SolidPaint).color) +
+          colorConvertFn((p.paints[0] as SolidPaint).color) +
           ";"
       )
       .sort();
 
-    figma.ui.postMessage({ type: "generated", data: outputText } as PostToUIMessage);
+    figma.ui.postMessage({
+      type: "generated",
+      data: outputText,
+    } as PostToUIMessage);
   }
 };
