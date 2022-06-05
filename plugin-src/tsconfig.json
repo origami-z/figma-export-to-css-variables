@@ -3,7 +3,7 @@
     "target": "es6",
     "lib": ["es6"],
     "strict": true,
-    "typeRoots": ["../node_modules/@figma", "../node_modules/@types"]
+    "typeRoots": ["../node_modules/@figma"]
   },
   "include": ["./", "../shared-src"],
   "exclude": ["__tests__"]
