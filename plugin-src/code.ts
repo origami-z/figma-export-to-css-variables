@@ -8,7 +8,7 @@ import {
   trimDefaultEnding,
 } from "./utils";
 
-figma.showUI(__html__, { themeColors: true, height: 520, width: 400 });
+figma.showUI(__html__, { themeColors: true, height: 500, width: 400 });
 
 figma.ui.onmessage = (msg: PostToFigmaMessage) => {
   if (msg.type === "export-css") {

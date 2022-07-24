@@ -1,18 +1,21 @@
-import { Button, ToolkitProvider } from "@jpmorganchase/uitk-core";
 import {
+  Button,
   Checkbox,
-  Dropdown,
   FlexLayout,
   FormField,
   Input,
-} from "@jpmorganchase/uitk-lab";
+  ToolkitProvider,
+  StackLayout,
+} from "@jpmorganchase/uitk-core";
+import { Dropdown } from "@jpmorganchase/uitk-lab";
 import React, { useEffect, useRef, useState } from "react";
 import {
-  ExportColorFormat,
   ExportColorAllFormats,
+  ExportColorFormat,
   PostToFigmaMessage,
   PostToUIMessage,
 } from "../shared-src";
+
 import "./App.css";
 
 function App() {
@@ -69,7 +72,7 @@ function App() {
 
   return (
     <ToolkitProvider>
-      <FlexLayout direction="column">
+      <StackLayout gap={1}>
         <FormField label="Prefix" labelPlacement="left">
           <Input
             value={prefix}
@@ -110,7 +113,7 @@ function App() {
         <Button onClick={onCopy} ref={copyButtonRef}>
           Copy
         </Button>
-      </FlexLayout>
+      </StackLayout>
     </ToolkitProvider>
   );
 }

@@ -20,10 +20,10 @@
   "author": "Zhihao Cui",
   "license": "MIT",
   "dependencies": {
-    "@jpmorganchase/uitk-core": "^0.1.0",
-    "@jpmorganchase/uitk-icons": "^0.1.0",
-    "@jpmorganchase/uitk-lab": "^0.1.0",
-    "@jpmorganchase/uitk-theme": "^0.1.0",
+    "@jpmorganchase/uitk-core": "^0.3.0",
+    "@jpmorganchase/uitk-icons": "^0.2.0",
+    "@jpmorganchase/uitk-lab": "^0.3.0",
+    "@jpmorganchase/uitk-theme": "^0.3.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
