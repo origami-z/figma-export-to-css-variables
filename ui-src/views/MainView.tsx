@@ -73,6 +73,7 @@ export const MainView = () => {
         <Input
           value={prefix}
           onChange={(e) => setPrefix(e.currentTarget.value)}
+          inputProps={{ placeholder: "e.g. brand-" }}
         ></Input>
       </FormField>
       <FormField label="Format" labelPlacement="left">
