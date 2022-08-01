@@ -1,10 +1,16 @@
 export type GeneratedToUIMessage = {
   type: "generated";
-  /** Each line of text */
-  data: string[];
+  data: string;
 };
 
-export type PostToUIMessage = GeneratedToUIMessage;
+/** Defines in manifest.json */
+export type PluginCommandType = "export-css-var" | "export-json";
+export type LaunchViewToUIMessage = {
+  type: "launch-view";
+  command: PluginCommandType;
+};
+
+export type PostToUIMessage = GeneratedToUIMessage | LaunchViewToUIMessage;
 
 export const ExportColorAllFormats = ["RGB", "HEX"] as const;
 export type ExportColorFormat = typeof ExportColorAllFormats[number];
@@ -17,4 +23,14 @@ export type ExportCssToFigmaMessage = {
   ignoreDefaultEnding?: boolean;
 };
 
-export type PostToFigmaMessage = ExportCssToFigmaMessage;
+export type ExportJsonToFigmaMessage = {
+  type: "export-json";
+  format: ExportColorFormat;
+};
+
+export type UIRedayToFigmaMessage = {
+  type: "ui-ready";
+
+}
+
+export type PostToFigmaMessage = | ExportCssToFigmaMessage | UIRedayToFigmaMessage | ExportJsonToFigmaMessage;

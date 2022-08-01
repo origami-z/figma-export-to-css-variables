@@ -1,9 +1,13 @@
 {
-  "name": "Export to CSS Variable",
+  "name": "Export Color Styles",
   "id": "random-id-to-be-replaced-export-to-css-variable",
   "api": "1.0.0",
   "editorType": ["figma"],
   "permissions": [],
   "main": "dist/code.js",
-  "ui": "dist/index.html"
+  "ui": "dist/index.html",
+  "menu": [
+    { "name": "Export CSS Variable", "command": "export-css-var" },
+    { "name": "Export JSON", "command": "export-json" }
+  ]
 }

@@ -1,11 +1,4 @@
-import {
-  Button,
-  Checkbox,
-  FlexLayout,
-  FormField,
-  Input,
-  StackLayout,
-} from "@jpmorganchase/uitk-core";
+import { Button, FormField, StackLayout } from "@jpmorganchase/uitk-core";
 import { Dropdown } from "@jpmorganchase/uitk-lab";
 import React, { useEffect, useRef, useState } from "react";
 import {
@@ -15,27 +8,21 @@ import {
   PostToUIMessage,
 } from "../../shared-src";
 
-export const ExportCssView = () => {
+export const ExportJsonView = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const copyButtonRef = useRef<HTMLButtonElement>(null);
 
   const [text, setText] = useState("");
-  const [prefix, setPrefix] = useState("");
   const [format, setFormat] = useState<ExportColorFormat>(
     ExportColorAllFormats[0]
   );
-  const [ignoreFirstGroup, setIgnoreFirstGroup] = useState(false);
-  const [ignoreDefaultEnding, setIgnoreDefaultEnding] = useState(false);
 
   const onExport = () => {
     parent.postMessage(
       {
         pluginMessage: {
-          type: "export-css",
-          prefix,
+          type: "export-json",
           format,
-          ignoreFirstGroup,
-          ignoreDefaultEnding,
         } as PostToFigmaMessage,
       },
       "*"
@@ -69,13 +56,6 @@ export const ExportCssView = () => {
 
   return (
     <StackLayout gap={1}>
-      <FormField label="Prefix" labelPlacement="left">
-        <Input
-          value={prefix}
-          onChange={(e) => setPrefix(e.currentTarget.value)}
-          inputProps={{ placeholder: "e.g. brand-" }}
-        ></Input>
-      </FormField>
       <FormField label="Format" labelPlacement="left">
         <Dropdown
           source={ExportColorAllFormats}
@@ -87,18 +67,6 @@ export const ExportCssView = () => {
           }}
         />
       </FormField>
-      <FlexLayout>
-        <Checkbox
-          label="Extract by first group"
-          checked={ignoreFirstGroup}
-          onChange={(_, checked) => setIgnoreFirstGroup(checked)}
-        />
-        <Checkbox
-          label="Trim default ending"
-          checked={ignoreDefaultEnding}
-          onChange={(_, checked) => setIgnoreDefaultEnding(checked)}
-        />
-      </FlexLayout>
       <Button onClick={onExport}>Export</Button>
       <textarea
         rows={20}
