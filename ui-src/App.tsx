@@ -1,6 +1,6 @@
 import { ToolkitProvider } from "@jpmorganchase/uitk-core";
 import React, { useState, useEffect } from "react";
-import { MainView } from "./views/MainView";
+import { ExportCssView } from "./views/ExportCssView";
 
 import "./App.css";
 import "./Icon.css"; // icon bug from uitk-icons@0.2.0 & 0.3.0
@@ -17,7 +17,7 @@ function App() {
 
   return (
     <ToolkitProvider theme={theme}>
-      <MainView />
+      <ExportCssView />
     </ToolkitProvider>
   );
 }

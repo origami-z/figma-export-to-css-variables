@@ -15,7 +15,7 @@ import {
   PostToUIMessage,
 } from "../../shared-src";
 
-export const MainView = () => {
+export const ExportCssView = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const copyButtonRef = useRef<HTMLButtonElement>(null);
 
