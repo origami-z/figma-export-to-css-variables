@@ -30,7 +30,9 @@ export type ExportJsonToFigmaMessage = {
 
 export type UIRedayToFigmaMessage = {
   type: "ui-ready";
+};
 
-}
-
-export type PostToFigmaMessage = | ExportCssToFigmaMessage | UIRedayToFigmaMessage | ExportJsonToFigmaMessage;
+export type PostToFigmaMessage =
+  | ExportCssToFigmaMessage
+  | UIRedayToFigmaMessage
+  | ExportJsonToFigmaMessage;
