@@ -6,6 +6,7 @@ import {
 import {
   convertNaming,
   convertNamingFromGroup,
+  getColorConvertFn,
   getHexStringFromFigmaColor,
   getRgbStringFromFigmaColor,
   splitGroup,
@@ -45,11 +46,8 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
       return color.type === "SOLID";
     });
 
-    // Alpha channel is ignored here
-    const colorConvertFn =
-      msg.format === "RGB"
-        ? getRgbStringFromFigmaColor
-        : getHexStringFromFigmaColor;
+    // Alpha channel is ignored in certain format
+    const colorConvertFn = getColorConvertFn(msg.format);
 
     let outputText: string[] = [];
     if (msg.ignoreFirstGroup) {
@@ -69,7 +67,10 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
         const cssVarLine =
           varNameAfterTrim +
           ": " +
-          colorConvertFn((p.paints[0] as SolidPaint).color) +
+          colorConvertFn(
+            (p.paints[0] as SolidPaint).color,
+            (p.paints[0] as SolidPaint).opacity
+          ) +
           ";";
 
         if (groupMap.has(groupName)) {
@@ -92,7 +93,10 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
           return (
             varNameAfterTrim +
             ": " +
-            colorConvertFn((p.paints[0] as SolidPaint).color) +
+            colorConvertFn(
+              (p.paints[0] as SolidPaint).color,
+              (p.paints[0] as SolidPaint).opacity
+            ) +
             ";"
           );
         })
@@ -109,14 +113,11 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
       return color.type === "SOLID";
     });
 
-    // Alpha channel is ignored here
-    const colorConvertFn =
-      msg.format === "RGB"
-        ? getRgbStringFromFigmaColor
-        : getHexStringFromFigmaColor;
+    // Alpha channel is ignored in certain format
+    const colorConvertFn = getColorConvertFn(msg.format);
 
     const jsonObj: StyleRecursiveObj = {};
-    console.log({ jsonObj });
+    // console.log({ jsonObj });
 
     for (const p of solidPaints) {
       const parts = splitGroup(p.name);
@@ -130,7 +131,10 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
         target = target[part!] = target[part!] || {};
       }
 
-      const value = colorConvertFn((p.paints[0] as SolidPaint).color);
+      const value = colorConvertFn(
+        (p.paints[0] as SolidPaint).color,
+        (p.paints[0] as SolidPaint).opacity
+      );
       // Set value at end of path
       target[parts[0]] = value;
     }

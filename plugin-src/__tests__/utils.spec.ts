@@ -5,6 +5,7 @@ import {
   getHexStringFromFigmaColor,
   camelize,
   trimDefaultEnding,
+  getRgbaStringFromFigmaColor,
 } from "../utils";
 
 describe("camelize", () => {
@@ -87,5 +88,18 @@ describe("getHexStringFromFigmaColor", () => {
     expect(getHexStringFromFigmaColor({ r: 1, g: 1, b: 1 } as RGB)).toEqual(
       "#FFFFFF"
     );
+  });
+});
+
+describe("getRgbaStringFromFigmaColor", () => {
+  test("converts 0,0,0", () => {
+    expect(getRgbaStringFromFigmaColor({ r: 0, g: 0, b: 0 } as RGB)).toEqual(
+      "rgba(0, 0, 0, 1)"
+    );
+  });
+  test("converts 0.5,0.5,0.5,0.5", () => {
+    expect(
+      getRgbaStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB, 0.5)
+    ).toEqual("rgba(128, 128, 128, 0.5)");
   });
 });

@@ -1,3 +1,5 @@
+import { ExportColorFormat } from "../shared-src/messages";
+
 /** Turns string into Camel case except full capital case */
 export function camelize(str: string) {
   if (/^[A-Z]+$/.test(str.trim())) {
@@ -60,4 +62,27 @@ export function getHexStringFromFigmaColor({ r, g, b }: RGB) {
     componentToHex(color1To255(g)) +
     componentToHex(color1To255(b))
   );
+}
+
+export function removeDp(input: number, dp: number) {
+  return parseFloat(input.toFixed(dp));
+}
+
+export function getRgbaStringFromFigmaColor(rgb: RGB, opacity?: number) {
+  return `rgba(${color1To255(rgb.r)}, ${color1To255(rgb.g)}, ${color1To255(
+    rgb.b
+  )}, ${removeDp(opacity || 1, 2)})`;
+}
+
+export function getColorConvertFn(format: ExportColorFormat) {
+  switch (format) {
+    case "RGB":
+      return getRgbStringFromFigmaColor;
+    case "HEX":
+      return getHexStringFromFigmaColor;
+    case "RGBA":
+      return getRgbaStringFromFigmaColor;
+    default:
+      throw new Error(`${format} not supported by getColorConvertFn`);
+  }
 }
