@@ -17,14 +17,15 @@ type StyleRecursiveObj = {
   [key: string]: StyleRecursiveObj | string;
 };
 
-const WINDOW_WIDTH = 400;
+const CCS_WINDOW_WIDTH = 400;
 const CSS_VIEW_HEIGHT = 500;
+const JSON_WINDOW_WIDTH = 350;
 const JSON_VIEW_HEIGHT = 432;
 
 figma.showUI(__html__, {
   themeColors: true,
   height: CSS_VIEW_HEIGHT,
-  width: WINDOW_WIDTH,
+  width: CCS_WINDOW_WIDTH,
   title:
     figma.command === "export-css-var" ? "Export CSS Variables" : "Export JSON",
 });
@@ -33,7 +34,7 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
   if (msg.type === "ui-ready") {
     const command = figma.command as PluginCommandType;
     figma.ui.resize(
-      WINDOW_WIDTH,
+      command === "export-css-var" ? CCS_WINDOW_WIDTH : JSON_WINDOW_WIDTH,
       command === "export-css-var" ? CSS_VIEW_HEIGHT : JSON_VIEW_HEIGHT
     );
     figma.ui.postMessage({
