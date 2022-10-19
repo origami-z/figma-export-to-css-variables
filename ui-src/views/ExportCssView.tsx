@@ -1,6 +1,7 @@
 import {
   Button,
   Checkbox,
+  FlexItem,
   FlexLayout,
   FormField,
   Input,
@@ -79,29 +80,30 @@ export const ExportCssView = () => {
       <FormField label="Format" labelPlacement="left">
         <Dropdown
           source={ExportColorAllFormats}
-          selectedItem={format}
-          onChange={(_, item) => {
+          selected={format}
+          onSelectionChange={(_, item) => {
             if (item) {
               setFormat(item);
             }
           }}
         />
       </FormField>
-      <FlexLayout>
-        <Checkbox
-          label="Extract by first group"
-          checked={ignoreFirstGroup}
-          onChange={(_, checked) => setIgnoreFirstGroup(checked)}
-        />
-        <Checkbox
-          label="Trim default ending"
-          checked={ignoreDefaultEnding}
-          onChange={(_, checked) => setIgnoreDefaultEnding(checked)}
-        />
-      </FlexLayout>
+      <FlexItem>
+        <FlexLayout>
+          <Checkbox
+            label="Extract by first group"
+            checked={ignoreFirstGroup}
+            onChange={(_, checked) => setIgnoreFirstGroup(checked)}
+          />
+          <Checkbox
+            label="Trim default ending"
+            checked={ignoreDefaultEnding}
+            onChange={(_, checked) => setIgnoreDefaultEnding(checked)}
+          />
+        </FlexLayout>
+      </FlexItem>
       <Button onClick={onExport}>Export</Button>
       <textarea
-        rows={20}
         value={text}
         onChange={(e) => setText(e.currentTarget.value)}
         ref={textareaRef}

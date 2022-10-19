@@ -59,8 +59,8 @@ export const ExportJsonView = () => {
       <FormField label="Format" labelPlacement="left">
         <Dropdown
           source={ExportColorAllFormats}
-          selectedItem={format}
-          onChange={(_, item) => {
+          selected={format}
+          onSelectionChange={(_, item) => {
             if (item) {
               setFormat(item);
             }

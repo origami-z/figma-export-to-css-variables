@@ -10,7 +10,6 @@ import { ExportCssView } from "./views/ExportCssView";
 import { ExportJsonView } from "./views/ExportJsonView";
 
 import "./App.css";
-import "./Icon.css"; // icon bug from uitk-icons@0.2.0 & 0.3.0
 
 function App() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
