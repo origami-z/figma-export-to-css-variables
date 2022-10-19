@@ -69,7 +69,6 @@ export const ExportJsonView = () => {
       </FormField>
       <Button onClick={onExport}>Export</Button>
       <textarea
-        rows={20}
         value={text}
         onChange={(e) => setText(e.currentTarget.value)}
         ref={textareaRef}

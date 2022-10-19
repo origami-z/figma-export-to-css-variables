@@ -32,7 +32,14 @@ export type UIRedayToFigmaMessage = {
   type: "ui-ready";
 };
 
+export type ResizeWindowToFigmaMessage = {
+  type: "resize-window";
+  width: number;
+  height: number;
+};
+
 export type PostToFigmaMessage =
   | ExportCssToFigmaMessage
   | UIRedayToFigmaMessage
-  | ExportJsonToFigmaMessage;
+  | ExportJsonToFigmaMessage
+  | ResizeWindowToFigmaMessage;

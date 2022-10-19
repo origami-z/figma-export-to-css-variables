@@ -5,6 +5,7 @@ import {
   PostToFigmaMessage,
   PostToUIMessage,
 } from "../shared-src";
+import { CornerResizer } from "./components/CornerResizer";
 import { ExportCssView } from "./views/ExportCssView";
 import { ExportJsonView } from "./views/ExportJsonView";
 
@@ -54,9 +55,12 @@ function App() {
   }, []);
 
   return (
-    <ToolkitProvider theme={theme}>
-      {launchCommand === "export-css-var" && <ExportCssView />}
-      {launchCommand === "export-json" && <ExportJsonView />}
+    <ToolkitProvider theme={theme} applyClassesToChild>
+      <div className="appRoot">
+        {launchCommand === "export-css-var" && <ExportCssView />}
+        {launchCommand === "export-json" && <ExportJsonView />}
+        <CornerResizer />
+      </div>
     </ToolkitProvider>
   );
 }

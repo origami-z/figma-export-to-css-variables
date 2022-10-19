@@ -1,7 +1,19 @@
+#root,
+.appRoot,
+.uitkFlexLayout {
+  height: 100%;
+}
+
 .uitk-light {
   color-scheme: light;
 }
 
 .uitk-dark {
   color-scheme: dark;
+}
+
+.uitk-light textarea,
+.uitk-dark textarea {
+  resize: none;
+  flex: 1;
 }

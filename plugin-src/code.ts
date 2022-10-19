@@ -7,8 +7,6 @@ import {
   convertNaming,
   convertNamingFromGroup,
   getColorConvertFn,
-  getHexStringFromFigmaColor,
-  getRgbStringFromFigmaColor,
   splitGroup,
   trimDefaultEnding,
 } from "./utils";
@@ -17,7 +15,7 @@ type StyleRecursiveObj = {
   [key: string]: StyleRecursiveObj | string;
 };
 
-const CCS_WINDOW_WIDTH = 400;
+const CSS_WINDOW_WIDTH = 400;
 const CSS_VIEW_HEIGHT = 500;
 const JSON_WINDOW_WIDTH = 350;
 const JSON_VIEW_HEIGHT = 432;
@@ -25,7 +23,7 @@ const JSON_VIEW_HEIGHT = 432;
 figma.showUI(__html__, {
   themeColors: true,
   height: CSS_VIEW_HEIGHT,
-  width: CCS_WINDOW_WIDTH,
+  width: CSS_WINDOW_WIDTH,
   title:
     figma.command === "export-css-var" ? "Export CSS Variables" : "Export JSON",
 });
@@ -34,7 +32,7 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
   if (msg.type === "ui-ready") {
     const command = figma.command as PluginCommandType;
     figma.ui.resize(
-      command === "export-css-var" ? CCS_WINDOW_WIDTH : JSON_WINDOW_WIDTH,
+      command === "export-css-var" ? CSS_WINDOW_WIDTH : JSON_WINDOW_WIDTH,
       command === "export-css-var" ? CSS_VIEW_HEIGHT : JSON_VIEW_HEIGHT
     );
     figma.ui.postMessage({
@@ -148,5 +146,11 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
       type: "generated",
       data: result,
     } as PostToUIMessage);
+  } else if (msg.type === "resize-window") {
+    const { width, height } = msg;
+    figma.ui.resize(
+      Math.max(width, JSON_WINDOW_WIDTH),
+      Math.max(height, JSON_VIEW_HEIGHT)
+    );
   }
 };
