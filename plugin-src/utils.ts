@@ -44,10 +44,16 @@ export function color1To255(colorValue: number) {
   return Math.round(colorValue * 255);
 }
 
-export function getRgbStringFromFigmaColor(rgb: RGB) {
-  return `rgb(${color1To255(rgb.r)}, ${color1To255(rgb.g)}, ${color1To255(
-    rgb.b
-  )})`;
+export function getRgbStringFromFigmaColor(rgb: RGB, opacity?: number) {
+  if (opacity !== undefined && opacity !== 1) {
+    return `rgba(${color1To255(rgb.r)}, ${color1To255(rgb.g)}, ${color1To255(
+      rgb.b
+    )}, ${removeDp(opacity || 1, 2)})`;
+  } else {
+    return `rgb(${color1To255(rgb.r)}, ${color1To255(rgb.g)}, ${color1To255(
+      rgb.b
+    )})`;
+  }
 }
 
 function componentToHex(c: number) {
@@ -55,23 +61,27 @@ function componentToHex(c: number) {
   return hex.length == 1 ? "0" + hex : hex;
 }
 
-export function getHexStringFromFigmaColor({ r, g, b }: RGB) {
-  return (
-    "#" +
-    componentToHex(color1To255(r)) +
-    componentToHex(color1To255(g)) +
-    componentToHex(color1To255(b))
-  );
+export function getHexStringFromFigmaColor({ r, g, b }: RGB, opacity?: number) {
+  if (opacity !== undefined && opacity !== 1) {
+    return (
+      "#" +
+      componentToHex(color1To255(r)) +
+      componentToHex(color1To255(g)) +
+      componentToHex(color1To255(b)) +
+      componentToHex(color1To255(opacity))
+    );
+  } else {
+    return (
+      "#" +
+      componentToHex(color1To255(r)) +
+      componentToHex(color1To255(g)) +
+      componentToHex(color1To255(b))
+    );
+  }
 }
 
 export function removeDp(input: number, dp: number) {
   return parseFloat(input.toFixed(dp));
-}
-
-export function getRgbaStringFromFigmaColor(rgb: RGB, opacity?: number) {
-  return `rgba(${color1To255(rgb.r)}, ${color1To255(rgb.g)}, ${color1To255(
-    rgb.b
-  )}, ${removeDp(opacity || 1, 2)})`;
 }
 
 export function getColorConvertFn(format: ExportColorFormat) {
@@ -80,8 +90,6 @@ export function getColorConvertFn(format: ExportColorFormat) {
       return getRgbStringFromFigmaColor;
     case "HEX":
       return getHexStringFromFigmaColor;
-    case "RGBA":
-      return getRgbaStringFromFigmaColor;
     default:
       throw new Error(`${format} not supported by getColorConvertFn`);
   }

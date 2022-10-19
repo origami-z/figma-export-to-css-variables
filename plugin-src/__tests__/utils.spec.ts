@@ -5,7 +5,6 @@ import {
   getHexStringFromFigmaColor,
   camelize,
   trimDefaultEnding,
-  getRgbaStringFromFigmaColor,
 } from "../utils";
 
 describe("camelize", () => {
@@ -71,6 +70,16 @@ describe("getRgbStringFromFigmaColor", () => {
       getRgbStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB)
     ).toEqual("rgb(128, 128, 128)");
   });
+  test("converts 0.5,0.5,0.5 1, drops alpha when 1", () => {
+    expect(
+      getRgbStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB)
+    ).toEqual("rgb(128, 128, 128)");
+  });
+  test("converts 0.5,0.5,0.5,0.5", () => {
+    expect(
+      getRgbStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB, 0.5)
+    ).toEqual("rgba(128, 128, 128, 0.5)");
+  });
 });
 
 describe("getHexStringFromFigmaColor", () => {
@@ -89,17 +98,14 @@ describe("getHexStringFromFigmaColor", () => {
       "#FFFFFF"
     );
   });
-});
-
-describe("getRgbaStringFromFigmaColor", () => {
-  test("converts 0,0,0", () => {
-    expect(getRgbaStringFromFigmaColor({ r: 0, g: 0, b: 0 } as RGB)).toEqual(
-      "rgba(0, 0, 0, 1)"
-    );
+  test("converts 0.5,0.5,0.5,1, drops alpha when 1", () => {
+    expect(
+      getHexStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB, 1)
+    ).toEqual("#808080");
   });
   test("converts 0.5,0.5,0.5,0.5", () => {
     expect(
-      getRgbaStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB, 0.5)
-    ).toEqual("rgba(128, 128, 128, 0.5)");
+      getHexStringFromFigmaColor({ r: 0.5, g: 0.5, b: 0.5 } as RGB, 0.5)
+    ).toEqual("#80808080");
   });
 });

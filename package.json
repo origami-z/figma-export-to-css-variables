@@ -12,7 +12,7 @@
     "tsc:tests": "tsc --noEmit -p plugin-src/__tests__",
     "tsc:watch": "concurrently -n widget,iframe,tests \"npm run tsc:main -- --watch --preserveWatchOutput\" \"npm run tsc:ui -- --watch --preserveWatchOutput\" \"npm run tsc:tests -- --watch --preserveWatchOutput\"",
     "build": "npm run build:ui && npm run build:main -- --minify",
-    "build:main": "esbuild plugin-src/code.ts --bundle --outfile=dist/code.js",
+    "build:main": "esbuild plugin-src/code.ts --bundle --outfile=dist/code.js --target=es6",
     "build:ui": "npx vite build --minify esbuild --emptyOutDir=false",
     "build:watch": "concurrently -n widget,iframe \"npm run build:main -- --watch\" \"npm run build:ui -- --watch\"",
     "dev": "concurrently -n tsc,build,vite 'npm:tsc:watch' 'npm:build:watch' 'vite'"
