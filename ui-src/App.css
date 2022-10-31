@@ -4,10 +4,16 @@
   height: 100%;
 }
 
+body {
+  background: var(--figma-color-bg);
+}
+
+.figma-light,
 .uitk-light {
   color-scheme: light;
 }
 
+.figma-dark,
 .uitk-dark {
   color-scheme: dark;
 }

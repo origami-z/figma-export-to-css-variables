@@ -8,20 +8,14 @@ import {
 import { CornerResizer } from "./components/CornerResizer";
 import { ExportCssView } from "./views/ExportCssView";
 import { ExportJsonView } from "./views/ExportJsonView";
+import { useFigmaPluginTheme } from "./components/hooks";
 
 import "./App.css";
 
 function App() {
-  const [theme, setTheme] = useState<"light" | "dark">("light");
+  const [theme] = useFigmaPluginTheme();
   const [launchCommand, setLaunchCommand] =
     useState<PluginCommandType>("export-css-var");
-
-  useEffect(() => {
-    // Support Figma dark theme - https://www.figma.com/plugin-docs/css-variables/
-    if (document.querySelector("html")?.classList.contains("figma-dark")) {
-      setTheme("dark");
-    }
-  }, []);
 
   useEffect(() => {
     parent.postMessage(
