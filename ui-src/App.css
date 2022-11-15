@@ -6,20 +6,26 @@
 
 body {
   background: var(--figma-color-bg);
+  font-family: "Open Sans";
 }
 
-.figma-light,
-.uitk-light {
+.figma-light {
   color-scheme: light;
 }
 
-.figma-dark,
-.uitk-dark {
+.figma-dark {
   color-scheme: dark;
 }
 
-.uitk-light textarea,
-.uitk-dark textarea {
+.uitk-density-touch.uitk-density-touch,
+.uitk-density-low.uitk-density-low,
+.uitk-density-medium.uitk-density-medium,
+.uitk-density-high.uitk-density-high {
+  /* This shouldn't be defined 4 times */
+  --uitk-typography-fontFamily: "Open Sans";
+}
+
+.appRoot textarea {
   resize: none;
   flex: 1;
 }

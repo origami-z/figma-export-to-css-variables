@@ -48,7 +48,7 @@ function App() {
   }, []);
 
   return (
-    <ToolkitProvider theme={theme} applyClassesToChild>
+    <ToolkitProvider mode={theme} applyClassesTo="child">
       <div className="appRoot">
         {launchCommand === "export-css-var" && <ExportCssView />}
         {launchCommand === "export-json" && <ExportJsonView />}
