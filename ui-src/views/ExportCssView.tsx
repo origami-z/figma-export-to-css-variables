@@ -104,6 +104,7 @@ export const ExportCssView = () => {
       </FlexItem>
       <Button onClick={onExport}>Export</Button>
       <textarea
+        aria-label="Code exported"
         value={text}
         onChange={(e) => setText(e.currentTarget.value)}
         ref={textareaRef}
