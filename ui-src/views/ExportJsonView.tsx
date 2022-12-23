@@ -1,5 +1,5 @@
-import { Button, FormField, StackLayout } from "@jpmorganchase/uitk-core";
-import { Dropdown } from "@jpmorganchase/uitk-lab";
+import { Button, StackLayout } from "@salt-ds/core";
+import { Dropdown, FormField } from "@salt-ds/lab";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ExportColorAllFormats,

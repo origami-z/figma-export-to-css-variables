@@ -1,13 +1,5 @@
-import {
-  Button,
-  Checkbox,
-  FlexItem,
-  FlexLayout,
-  FormField,
-  Input,
-  StackLayout,
-} from "@jpmorganchase/uitk-core";
-import { Dropdown } from "@jpmorganchase/uitk-lab";
+import { Button, FlexItem, FlexLayout, StackLayout } from "@salt-ds/core";
+import { Dropdown, Checkbox, FormField, Input } from "@salt-ds/lab";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ExportColorAllFormats,
