@@ -1,6 +1,6 @@
 #root,
 .appRoot,
-.uitkFlexLayout {
+.saltFlexLayout {
   height: 100%;
 }
 
@@ -15,14 +15,6 @@ body {
 
 .figma-dark {
   color-scheme: dark;
-}
-
-.uitk-density-touch.uitk-density-touch,
-.uitk-density-low.uitk-density-low,
-.uitk-density-medium.uitk-density-medium,
-.uitk-density-high.uitk-density-high {
-  /* This shouldn't be defined 4 times */
-  --uitk-typography-fontFamily: "Open Sans";
 }
 
 .appRoot textarea {
