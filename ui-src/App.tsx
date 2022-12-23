@@ -1,4 +1,4 @@
-import { ToolkitProvider } from "@jpmorganchase/uitk-core";
+import { SaltProvider } from "@salt-ds/core";
 import React, { useEffect, useState } from "react";
 import {
   PluginCommandType,
@@ -48,13 +48,13 @@ function App() {
   }, []);
 
   return (
-    <ToolkitProvider mode={theme} applyClassesTo="child">
+    <SaltProvider mode={theme} applyClassesTo="child">
       <div className="appRoot">
         {launchCommand === "export-css-var" && <ExportCssView />}
         {launchCommand === "export-json" && <ExportJsonView />}
         <CornerResizer />
       </div>
-    </ToolkitProvider>
+    </SaltProvider>
   );
 }
 
