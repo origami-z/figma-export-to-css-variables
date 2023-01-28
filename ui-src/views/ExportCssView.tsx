@@ -1,12 +1,12 @@
 import { Button, FlexItem, FlexLayout, StackLayout } from "@salt-ds/core";
-import { Dropdown, Checkbox, FormField, Input } from "@salt-ds/lab";
+import { Checkbox, Dropdown, FormField, Input } from "@salt-ds/lab";
 import React, { useEffect, useRef, useState } from "react";
 import {
   ExportColorAllFormats,
   ExportColorFormat,
   PostToFigmaMessage,
-  PostToUIMessage,
 } from "../../shared-src";
+import { FigmaToUIMessageEvent } from "../types";
 
 export const ExportCssView = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -29,7 +29,7 @@ export const ExportCssView = () => {
           format,
           ignoreFirstGroup,
           ignoreDefaultEnding,
-        } as PostToFigmaMessage,
+        } satisfies PostToFigmaMessage,
       },
       "*"
     );
@@ -41,8 +41,8 @@ export const ExportCssView = () => {
     copyButtonRef.current?.focus();
   };
 
-  const handleMessage = (event: MessageEvent) => {
-    const pluginMessage = event.data.pluginMessage as PostToUIMessage;
+  const handleMessage = (event: FigmaToUIMessageEvent) => {
+    const pluginMessage = event.data.pluginMessage;
     switch (pluginMessage.type) {
       case "generated":
         setText(pluginMessage.data);

@@ -13,7 +13,7 @@ export type LaunchViewToUIMessage = {
 export type PostToUIMessage = GeneratedToUIMessage | LaunchViewToUIMessage;
 
 export const ExportColorAllFormats = ["RGB", "HEX"] as const;
-export type ExportColorFormat = typeof ExportColorAllFormats[number];
+export type ExportColorFormat = (typeof ExportColorAllFormats)[number];
 
 export type ExportCssToFigmaMessage = {
   type: "export-css";
