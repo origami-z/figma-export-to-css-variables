@@ -1,14 +1,14 @@
 import { SaltProvider } from "@salt-ds/core";
 import React, { useEffect, useState } from "react";
 import {
+  FigmaToUIMessageEvent,
   PluginCommandType,
   PostToFigmaMessage,
-  PostToUIMessage,
 } from "../shared-src";
 import { CornerResizer } from "./components/CornerResizer";
+import { useFigmaPluginTheme } from "./components/hooks";
 import { ExportCssView } from "./views/ExportCssView";
 import { ExportJsonView } from "./views/ExportJsonView";
-import { useFigmaPluginTheme } from "./components/hooks";
 
 import "./App.css";
 
@@ -28,8 +28,8 @@ function App() {
     );
   }, []);
 
-  const handleMessage = (event: MessageEvent) => {
-    const msg = event.data.pluginMessage as PostToUIMessage;
+  const handleMessage = (event: FigmaToUIMessageEvent) => {
+    const msg = event.data.pluginMessage;
     switch (msg.type) {
       case "launch-view":
         setLaunchCommand(msg.command);

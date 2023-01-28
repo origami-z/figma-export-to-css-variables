@@ -4,8 +4,8 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   ExportColorAllFormats,
   ExportColorFormat,
+  FigmaToUIMessageEvent,
   PostToFigmaMessage,
-  PostToUIMessage,
 } from "../../shared-src";
 
 export const ExportJsonView = () => {
@@ -23,7 +23,7 @@ export const ExportJsonView = () => {
         pluginMessage: {
           type: "export-json",
           format,
-        } as PostToFigmaMessage,
+        } satisfies PostToFigmaMessage,
       },
       "*"
     );
@@ -35,8 +35,8 @@ export const ExportJsonView = () => {
     copyButtonRef.current?.focus();
   };
 
-  const handleMessage = (event: MessageEvent) => {
-    const pluginMessage = event.data.pluginMessage as PostToUIMessage;
+  const handleMessage = (event: FigmaToUIMessageEvent) => {
+    const pluginMessage = event.data.pluginMessage;
     switch (pluginMessage.type) {
       case "generated":
         setText(pluginMessage.data);

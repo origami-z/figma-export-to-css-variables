@@ -38,7 +38,7 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
     figma.ui.postMessage({
       type: "launch-view",
       command: command,
-    } as PostToUIMessage);
+    } satisfies PostToUIMessage);
   } else if (msg.type === "export-css") {
     const solidPaints = figma.getLocalPaintStyles().filter((paintStyle) => {
       let color = paintStyle.paints[0];
@@ -105,7 +105,7 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
     figma.ui.postMessage({
       type: "generated",
       data: outputText.join("\n"),
-    } as PostToUIMessage);
+    } satisfies PostToUIMessage);
   } else if (msg.type === "export-json") {
     const solidPaints = figma.getLocalPaintStyles().filter((paintStyle) => {
       let color = paintStyle.paints[0];
@@ -145,7 +145,7 @@ figma.ui.onmessage = (msg: PostToFigmaMessage) => {
     figma.ui.postMessage({
       type: "generated",
       data: result,
-    } as PostToUIMessage);
+    } satisfies PostToUIMessage);
   } else if (msg.type === "resize-window") {
     const { width, height } = msg;
     figma.ui.resize(
