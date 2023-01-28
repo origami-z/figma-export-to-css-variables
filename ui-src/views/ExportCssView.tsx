@@ -4,9 +4,9 @@ import React, { useEffect, useRef, useState } from "react";
 import {
   ExportColorAllFormats,
   ExportColorFormat,
-  FigmaToUIMessageEvent,
   PostToFigmaMessage,
 } from "../../shared-src";
+import { FigmaToUIMessageEvent } from "../types";
 
 export const ExportCssView = () => {
   const textareaRef = useRef<HTMLTextAreaElement>(null);

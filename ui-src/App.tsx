@@ -1,12 +1,9 @@
 import { SaltProvider } from "@salt-ds/core";
 import React, { useEffect, useState } from "react";
-import {
-  FigmaToUIMessageEvent,
-  PluginCommandType,
-  PostToFigmaMessage,
-} from "../shared-src";
+import { PluginCommandType, PostToFigmaMessage } from "../shared-src";
 import { CornerResizer } from "./components/CornerResizer";
 import { useFigmaPluginTheme } from "./components/hooks";
+import { FigmaToUIMessageEvent } from "./types";
 import { ExportCssView } from "./views/ExportCssView";
 import { ExportJsonView } from "./views/ExportJsonView";
 
