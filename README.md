@@ -1,3 +1,7 @@
+This project has been moved to [JPMC Open Source Repo](https://github.com/jpmorganchase/Figma-Plugins-and-Widgets/tree/main/packages/export-styles)
+
+---
+
 # Export Figma Styles to CSS Variables
 
 ![Plugin screenshot](./docs/plugin-screenshot.png)
